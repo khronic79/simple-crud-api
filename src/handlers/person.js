@@ -1,5 +1,4 @@
 const controllers = require('../controllers/person');
-const http = require("http");
 const sendError = require('../utils/sendError');
 
 async function getAllPersons(req, res) {
@@ -8,7 +7,7 @@ async function getAllPersons(req, res) {
     res.end(JSON.stringify(persons));
 }
 
-async function getPerson(req = new http.IncomingMessage, res = new http.ServerResponse) {
+async function getPerson(req, res) {
     const pesonId = req.params.id;
     const reg = RegExp('^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$');
     const check = reg.test(pesonId);
@@ -25,7 +24,7 @@ async function getPerson(req = new http.IncomingMessage, res = new http.ServerRe
     res.end(JSON.stringify(person));
 }
 
-async function createPerson(req = new http.IncomingMessage, res = new http.ServerResponse) {
+async function createPerson(req, res) {
     let json;
     try {
         json = JSON.parse(req.body);
@@ -37,7 +36,7 @@ async function createPerson(req = new http.IncomingMessage, res = new http.Serve
     res.end(JSON.stringify(person));
 }
 
-async function updatePerson(req = new http.IncomingMessage, res = new http.ServerResponse) {
+async function updatePerson(req, res) {
     const id = req.params.id;
     const reg = RegExp('^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$');
     const check = reg.test(id);
@@ -61,7 +60,7 @@ async function updatePerson(req = new http.IncomingMessage, res = new http.Serve
     res.end(JSON.stringify(person));
 }
 
-async function deletePerson(req = new http.IncomingMessage, res = new http.ServerResponse) {
+async function deletePerson(req, res) {
     const id = req.params.id;
     const reg = RegExp('^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$');
     const check = reg.test(id);
