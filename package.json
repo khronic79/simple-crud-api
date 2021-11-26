@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "jest": {
+    "testPathIgnorePatterns": ["/__tests__/utils"]
+  },
   "scripts": {
     "start:dev": "nodemon index.js",
     "start:prod": "webpack && node dist/server.js"

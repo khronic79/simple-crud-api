@@ -1,7 +1,17 @@
 const sendRequestToServer = require('./utils/sendRequestToServer');
+const createTestServer = require('./utils/createTestServer');
+let personId = '';
+let server = null;
 
 describe('E2E CRUD test. Scenario 1', () => {
-    let personId = '';
+    beforeAll(() => {
+        createTestServer().then((testServer) => {
+            server = testServer;
+        });
+    });
+    afterAll(() => {
+        server.close();
+    });
     it('Get all users from server (database is empty)', async () => {
         const options = {
             hostname: 'localhost',
