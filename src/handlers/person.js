@@ -32,6 +32,10 @@ async function createPerson(req, res) {
         sendError(res, 'Your JSON data has a problem', 400);
     }
     const person = await controllers.createPerson(json);
+    if (!person) {
+        sendError(res, 'Your JSON data has a problem', 400);
+        return;
+    }
     res.writeHead(201, { "Content-Type": "application/json" });
     res.end(JSON.stringify(person));
 }
