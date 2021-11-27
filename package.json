@@ -9,7 +9,7 @@
   "scripts": {
     "start:dev": "nodemon index.js",
     "start:prod": "webpack && node dist/server.js",
-    "start:test": "npx jest ./__tests__/scenario1.test.js ./__tests__/scenario2.test.js"
+    "start:test": "npx jest ./__tests__/scenario1.test.js"
   },
   "devDependencies": {
     "jest": "^27.3.1",

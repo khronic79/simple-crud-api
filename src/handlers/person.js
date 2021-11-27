@@ -2,7 +2,12 @@ const controllers = require('../controllers/person');
 const sendError = require('../utils/sendError');
 
 async function getAllPersons(req, res) {
-    const persons = await controllers.getAllPersons();
+    let persons = null;
+    try {
+        persons = await controllers.getAllPersons();
+    } catch(err) {
+        throw err;
+    }
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(persons));
 }
@@ -15,7 +20,12 @@ async function getPerson(req, res) {
         sendError(res, 'Person ID should be in UUID format', 400);
         return;
     }
-    const person = await controllers.getPerson(pesonId);
+    let person = null;
+    try {
+        person = await controllers.getPerson(pesonId);
+    } catch(err) {
+        throw err;
+    }    
     if (!person) {
         sendError(res, `Record with id ${pesonId} does not exist`, 404);
         return;
@@ -31,7 +41,12 @@ async function createPerson(req, res) {
     } catch(err) {
         sendError(res, 'Your JSON data has a problem', 400);
     }
-    const person = await controllers.createPerson(json);
+    let person = null;
+    try {
+        person = await controllers.createPerson(json);
+    } catch(err) {
+        throw(err);
+    }
     if (!person) {
         sendError(res, 'Your JSON data has a problem', 400);
         return;
@@ -55,7 +70,12 @@ async function updatePerson(req, res) {
         sendError(res, 'Your JSON data has a problem', 400);
     }
     json.id = id;
-    const person = await controllers.updatePerson(json);
+    let person = null;
+    try {
+        person = await controllers.updatePerson(json);
+    } catch(err) {
+        throw(err);
+    }
     if (!person) {
         sendError(res, `Record with id ${id} does not exist`, 404);
         return;
@@ -72,7 +92,12 @@ async function deletePerson(req, res) {
         sendError(res, 'Person ID should be in UUID format', 400);
         return;
     }
-    const person = await controllers.deletePerson(id);
+    let person = null;
+    try {
+        person = await controllers.deletePerson(id);
+    } catch(err) {
+        throw err;
+    }
     if (!person) {
         sendError(res, `Record with id ${id} does not exist`, 404);
         return;

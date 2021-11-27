@@ -22,7 +22,11 @@ async function requestParser(req, res) {
     const handler = conf[template];
     const body = await getDataFromReq(req);
     req.body = body;
-    handler(req, res);
+    try {
+        await handler(req, res);
+    } catch(err) {
+        throw err;
+    }
 }
 
 module.exports = requestParser;

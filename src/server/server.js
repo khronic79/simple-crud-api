@@ -4,7 +4,7 @@ const sendError = require('../utils/sendError');
 
 const server = http.createServer(async (req, res) => {
     try {
-        requestParser(req, res);
+        await requestParser(req, res);
     } catch(err) {
         sendError(res, 'Houston we have a problem', 500);
     }
