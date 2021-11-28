@@ -5,7 +5,7 @@ const error = require('../src/errros/errors');
 let server = null;
 const PORT = 5003;
 
-describe('E2E CRUD test. Scenario 2', () => {
+describe('E2E CRUD test. Scenario 3', () => {
     beforeAll((done) => {
         createTestServer(PORT).then((testServer) => {
             server = testServer;
