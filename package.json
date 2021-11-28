@@ -1,0 +1,27 @@
+{
+  "name": "simple-crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/__tests__/utils"
+    ]
+  },
+  "scripts": {
+    "start:dev": "nodemon index.js",
+    "start:prod": "webpack && node dist/server.js",
+    "start:test1": "npx jest ./__tests__/scenario1.test.js",
+    "start:test2": "npx jest ./__tests__/scenario2.test.js",
+    "start:test3": "npx jest ./__tests__/scenario3.test.js",
+    "start:test": "npx jest ./__tests__/scenario1.test.js ./__tests__/scenario2.test.js ./__tests__/scenario3.test.js"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.15",
+    "uuid": "^8.3.2",
+    "webpack": "^5.64.2",
+    "webpack-cli": "^4.9.1"
+  }
+}
