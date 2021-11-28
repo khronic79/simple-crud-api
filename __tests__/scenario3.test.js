@@ -2,22 +2,23 @@ const sendRequestToServer = require('./utils/sendRequestToServer');
 const createTestServer = require('./utils/createTestServer');
 const controllers = require('../src/controllers/person');
 const error = require('../src/errros/errors');
-
 let server = null;
+const PORT = 5003;
 
 describe('E2E CRUD test. Scenario 2', () => {
-    beforeAll(() => {
-        createTestServer().then((testServer) => {
+    beforeAll((done) => {
+        createTestServer(PORT).then((testServer) => {
             server = testServer;
+            done();
         });
     });
-    afterAll(() => {
-        server.close();
+    afterAll((done) => {
+        server.close(done);
     });
     it('GET /person problem with db controller', async () => {
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: '/person',
             method: 'GET',
             headers: {
@@ -36,7 +37,7 @@ describe('E2E CRUD test. Scenario 2', () => {
     it('GET /person/123e4567-e89b-12d3-a456-426655440000 problem with db controller', async () => {
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: '/person/123e4567-e89b-12d3-a456-426655440000',
             method: 'GET',
             headers: {
@@ -60,7 +61,7 @@ describe('E2E CRUD test. Scenario 2', () => {
         });
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: '/person',
             method: 'POST',
             headers: {
@@ -84,7 +85,7 @@ describe('E2E CRUD test. Scenario 2', () => {
         });
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: '/person/123e4567-e89b-12d3-a456-426655440000',
             method: 'PUT',
             headers: {
@@ -103,7 +104,7 @@ describe('E2E CRUD test. Scenario 2', () => {
     it('DELETE /person/123e4567-e89b-12d3-a456-426655440000 problem with db controller', async () => {
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: '/person/123e4567-e89b-12d3-a456-426655440000',
             method: 'DELETE',
             headers: {

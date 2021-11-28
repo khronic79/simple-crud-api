@@ -2,20 +2,22 @@ const sendRequestToServer = require('./utils/sendRequestToServer');
 const createTestServer = require('./utils/createTestServer');
 let personId = '';
 let server = null;
+const PORT = 5001;
 
 describe('E2E CRUD test. Scenario 1', () => {
-    beforeAll(() => {
-        createTestServer().then((testServer) => {
+    beforeAll((done) => {
+        createTestServer(PORT).then((testServer) => {
             server = testServer;
+            done();
         });
     });
-    afterAll(() => {
-        server.close();
+    afterAll((done) => {
+        server.close(done);
     });
     it('Get all users from server (database is empty)', async () => {
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: '/person',
             method: 'GET',
             headers: {
@@ -35,7 +37,7 @@ describe('E2E CRUD test. Scenario 1', () => {
         });
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: '/person',
             method: 'POST',
             headers: {
@@ -53,7 +55,7 @@ describe('E2E CRUD test. Scenario 1', () => {
     it('Get created user from database', async () => {
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: `/person/${personId}`,
             method: 'GET',
             headers: {
@@ -76,7 +78,7 @@ describe('E2E CRUD test. Scenario 1', () => {
         });
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: `/person/${personId}`,
             method: 'PUT',
             headers: {
@@ -95,7 +97,7 @@ describe('E2E CRUD test. Scenario 1', () => {
     it('Delete created user from database', async () => {
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: `/person/${personId}`,
             method: 'DELETE',
             headers: {
@@ -109,7 +111,7 @@ describe('E2E CRUD test. Scenario 1', () => {
     it('Try to get deleted user from database', async () => {
         const options = {
             hostname: 'localhost',
-            port: 5000,
+            port: PORT,
             path: `/person/${personId}`,
             method: 'GET',
             headers: {

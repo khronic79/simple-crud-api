@@ -40,6 +40,7 @@ async function createPerson(req, res) {
         json = JSON.parse(req.body);
     } catch(err) {
         sendError(res, 'Your JSON data has a problem', 400);
+        return;
     }
     let person = null;
     try {
@@ -49,6 +50,10 @@ async function createPerson(req, res) {
     }
     if (!person) {
         sendError(res, 'Your JSON data has a problem', 400);
+        return;
+    }
+    if (!Array.isArray(json.hobbies)) {
+        sendError(res, 'Hobbies key has to be array type', 400);
         return;
     }
     res.writeHead(201, { "Content-Type": "application/json" });
@@ -78,6 +83,10 @@ async function updatePerson(req, res) {
     }
     if (!person) {
         sendError(res, `Record with id ${id} does not exist`, 404);
+        return;
+    }
+    if (!Array.isArray(json.hobbies)) {
+        sendError(res, 'Hobbies key has to be array type', 400);
         return;
     }
     res.writeHead(200, { "Content-Type": "application/json" });

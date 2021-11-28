@@ -1,8 +1,10 @@
-const server = require('../../src/server/server');
+const serverCallback = require('../../src/server/serverCallback');
+const http = require("http");
 
-function createTestServer() {
+function createTestServer(port) {
+    const server = http.createServer(serverCallback);
     return new Promise((resolve, reject) => {
-        server.listen(5000, () => {
+        server.listen(port, () => {
             resolve(server);
         });
         server.on('error', (error) => {
